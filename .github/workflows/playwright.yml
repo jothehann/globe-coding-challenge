@@ -47,10 +47,10 @@ jobs:
     #     run: npx playwright test --reporter=html
 
       - name: Retry Playwright tests on ${{ matrix.browser }}
-        uses: nick-fields/actions-retry@v3
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10 # ✅ Sets a timeout of 10 minutes for the retry step
-          retry-on: failure # ✅ Retries only on failure
+          retry-on: error # ✅ Retries only on failure
           max-attempts: 3 # ✅ Retries the Playwright tests up to 2 times (1 retry after first fail)
           command: npx playwright test --project=${{ matrix.browser }}
 
