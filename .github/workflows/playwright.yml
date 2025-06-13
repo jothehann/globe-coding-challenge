@@ -1,7 +1,7 @@
 name: Playwright Tests
 
 on:
-  workflow_dispatch: # Allows manual run from GitHub Actions tab
+  workflow_dispatch:
     inputs:
       browser:
         description: 'Choose browser to run tests on'
@@ -43,15 +43,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-    #   - name: Run Playwright tests
-    #     run: npx playwright test --reporter=html
-
       - name: Retry Playwright tests on ${{ matrix.browser }}
         uses: nick-fields/retry@v3
         with:
-          timeout_minutes: 10 # ✅ Sets a timeout of 10 minutes for the retry step
-          retry-on: error # ✅ Retries only on failure
-          max-attempts: 3 # ✅ Retries the Playwright tests up to 2 times (1 retry after first fail)
+          timeout_minutes: 10
+          retry_on: error
+          max_attempts: 3
           command: npx playwright test --project=${{ matrix.browser }}
 
       - name: Upload Playwright HTML report
