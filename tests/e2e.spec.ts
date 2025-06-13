@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { generateUser } from '../utils/generateData';
 import { PageFactory } from '../pages/_pageFactory';
 
-test.only('E2E Testing - SpreeCommerce Order', async ({ page }) => {
+test('E2E Testing - SpreeCommerce Order', async ({ page }) => {
 	const pages = new PageFactory(page);
 	const productsData = JSON.parse(readFileSync('data/products.json', 'utf-8'));
 	const addressData = JSON.parse(readFileSync('data/address.json', 'utf-8'));

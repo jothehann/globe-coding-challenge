@@ -7,7 +7,7 @@ on:
         type: choice
         description: 'Browser to run tests against'
         required: true
-        default: 'chromium'
+        default: 'firefox'
         options:
           - chromium
           - firefox
