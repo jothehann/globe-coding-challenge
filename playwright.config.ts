@@ -27,19 +27,8 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  
   projects: 
   [
-    {
-      name: 'chromium',
-      use: {
-        browserName: 'chromium',
-        viewport: null,
-        launchOptions: {
-          args: ['--start-maximized'],
-        }
-      }
-    },
     {
       name: 'firefox',
       use: {
@@ -51,11 +40,4 @@ export default defineConfig({
       }
     },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });

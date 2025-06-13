@@ -2,32 +2,11 @@ name: Playwright Tests
 
 on:
   workflow_dispatch:
-    inputs:
-      browser:
-        description: 'Choose browser to run tests on'
-        required: true
-        default: 'firefox'
-        type: choice
-        options:
-          - chromium
-          - firefox
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set.outputs.matrix }}
-    steps:
-      - id: set
-        run: |
-          echo "matrix={\"browser\": [\"${{ github.event.inputs.browser }}\"]}" >> $GITHUB_OUTPUT
   test:
-    needs: setup
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
-        
+       
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -43,13 +22,13 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Retry Playwright tests on ${{ matrix.browser }}
+      - name: Retry Playwright tests
         uses: nick-fields/retry@v3
         with:
-          timeout_minutes: 5
+          timeout_minutes: 3
           max_attempts: 3
           retry_on: error
-          command: npx playwright test --project=${{ matrix.browser }}
+          command: npx playwright test
 
       - name: Upload Playwright HTML report
         uses: actions/upload-artifact@v4
