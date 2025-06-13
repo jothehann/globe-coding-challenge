@@ -1,0 +1,30 @@
+{
+  "name": "globe-coding-challenge",
+  "version": "1.0.0",
+  "description": "This is a coding challenge to write automated test script using Playwright to test Spree Commerce",
+  "main": "index.js",
+  "scripts": {
+    "ui-mode": "npx playwright test --ui",
+    "headless": "HEADLESS=true npx playwright test",
+    "headful": "HEADLESS=false npx playwright test",
+    "report": "npx playwright show-report",
+    "trace": "HEADLESS=false npx playwright test --trace on"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jothehann/globe-coding-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jothehann/globe-coding-challenge/issues"
+  },
+  "homepage": "https://github.com/jothehann/globe-coding-challenge#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "@playwright/test": "^1.53.0",
+    "@types/node": "^24.0.0",
+    "dotenv": "^16.5.0"
+  }
+}
