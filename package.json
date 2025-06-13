@@ -6,6 +6,8 @@
   "scripts": {
     "ui-mode": "npx playwright test --ui",
     "test": "npx playwright test",
+    "chromium": "npx playwright test --project=chromium",
+    "firefox": "npx playwright test --project=firefox",
     "report": "npx playwright show-report",
     "trace": "npx playwright test --trace on",
     "prettier": "npx prettier tests/*.ts pages/*.ts data/*.json types/*.ts utils/*.ts .github/workflows/*.yml --write"
