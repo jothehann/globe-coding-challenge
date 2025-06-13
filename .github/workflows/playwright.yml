@@ -22,7 +22,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Retry Playwright tests
+      - name: Run Playwright tests
         uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
