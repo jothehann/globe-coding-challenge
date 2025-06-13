@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "ui-mode": "npx playwright test --ui",
-    "headless": "HEADLESS=true npx playwright test",
-    "headful": "HEADLESS=false npx playwright test",
+    "test": "npx playwright test",
     "report": "npx playwright show-report",
-    "trace": "HEADLESS=false npx playwright test --trace on"
+    "trace": "npx playwright test --trace on"
   },
   "repository": {
     "type": "git",

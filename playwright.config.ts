@@ -1,9 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotEnv from 'dotenv';
 
-
-const isHeadless = process.env.HEADLESS !== 'false';
-
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -22,9 +19,9 @@ export default defineConfig({
   timeout: 60 * 1000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
     baseURL: process.env.BASE_URL ?? 'https://demo.spreecommerce.org/',
+    headless: process.env.HEADLESS !== 'false',
+    ignoreHTTPSErrors: true,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
@@ -37,7 +34,6 @@ export default defineConfig({
     //   name: 'Chromium',
     //   use: {
     //     browserName: 'chromium',
-    //     headless: isHeadless,
     //     viewport: null,
     //     launchOptions: {
     //       args: ['--start-maximized'],
@@ -48,7 +44,6 @@ export default defineConfig({
       name: 'Firefox',
       use: {
         browserName: 'firefox',
-        headless: isHeadless,
         viewport: null,
         launchOptions: {
           args: [],
