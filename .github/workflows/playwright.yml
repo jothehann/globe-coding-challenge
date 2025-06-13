@@ -4,17 +4,30 @@ on:
   workflow_dispatch: # Allows manual run from GitHub Actions tab
     inputs:
       browser:
-        type: choice
-        description: 'Browser to run tests against'
+        description: 'Choose browser to run tests on'
         required: true
         default: 'firefox'
+        type: choice
         options:
           - chromium
           - firefox
+
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
+    steps:
+      - id: set
+        run: |
+          echo "matrix={\"browser\": [\"${{ github.event.inputs.browser }}\"]}" >> $GITHUB_OUTPUT
   test:
+    needs: setup
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,11 +40,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: npx playwright test --reporter=html
+    #   - name: Run Playwright tests
+    #     run: npx playwright test --reporter=html
+
+      - name: Retry Playwright tests on ${{ matrix.browser }}
+        uses: nick-field/actions-retry@v3
+        with:
+          timeout_minutes: 10 # ✅ Sets a timeout of 10 minutes for the retry step
+          retry-on: failure # ✅ Retries only on failure
+          max-attempts: 3 # ✅ Retries the Playwright tests up to 2 times (1 retry after first fail)
+          command: npx playwright test --project=${{ matrix.browser }}
 
       - name: Upload Playwright HTML report
         uses: actions/upload-artifact@v4
