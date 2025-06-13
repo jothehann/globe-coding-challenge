@@ -1,5 +1,5 @@
 export type PaymentType = {
-    cardNumber: string;
-    expirationDate: string;
-    securityCode: string;
+	cardNumber: string;
+	expirationDate: string;
+	securityCode: string;
 };

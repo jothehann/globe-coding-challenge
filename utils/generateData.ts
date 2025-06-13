@@ -1,4 +1,4 @@
-import {faker} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { UserType } from '../types/userType';
 
 /**
@@ -7,12 +7,12 @@ import { UserType } from '../types/userType';
  * @param gender - The gender to use for generating the first name. Can be "male" or "female". Defaults to "male".
  * @returns A user object containing `firstName`, `lastName`, and `email`.
  */
-export function generateUser(gender: "male" | "female" = "male"): UserType {
-    const firstName = faker.person.firstName(gender);
-    const lastName = faker.person.lastName('male');
-    return {
-        firstName,
-        lastName,
-        email: `auto.${firstName.toLowerCase()}.${faker.string.numeric(6)}@test.com`,
-    }
+export function generateUser(gender: 'male' | 'female' = 'male'): UserType {
+	const firstName = faker.person.firstName(gender);
+	const lastName = faker.person.lastName('male');
+	return {
+		firstName,
+		lastName,
+		email: `auto.${firstName.toLowerCase()}.${faker.string.numeric(6)}@test.com`,
+	};
 }

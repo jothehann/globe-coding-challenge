@@ -1,14 +1,14 @@
 [
-    {
-        "productName": "Ripped T-Shirt",
-        "size": "S"
-    },
-    {
-        "productName": "Rolled Sleeve Shirt",
-        "size": "M"
-    },
-    {
-        "productName": "White Watch",
-        "count": 2
-    }
+	{
+		"productName": "Ripped T-Shirt",
+		"size": "S"
+	},
+	{
+		"productName": "Rolled Sleeve Shirt",
+		"size": "M"
+	},
+	{
+		"productName": "White Watch",
+		"count": 2
+	}
 ]

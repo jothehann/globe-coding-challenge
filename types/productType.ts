@@ -1,5 +1,5 @@
 export type ProductType = {
-    productName: string;
-    count?: number;
-    size: string;
+	productName: string;
+	count?: number;
+	size: string;
 };
