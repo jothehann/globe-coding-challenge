@@ -27,9 +27,11 @@ test('E2E Testing - SpreeCommerce Order', async ({ page }) => {
 
 	// Add To Cart
 	let index = 0;
+	let totalPrice = 0;
 	for (const product of productsData) {
 		const isLast = index === productsData.length - 1;
-		await pages.productsPage.addProduct(product, isLast);
+		totalPrice += await pages.productsPage.addProduct(product, index);
+		await pages.productsPage.showAllOrCheckOut(isLast, totalPrice);
 		index++;
 	}
 

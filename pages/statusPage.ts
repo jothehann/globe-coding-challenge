@@ -30,10 +30,10 @@ export class StatusPage extends BasePage {
 		const lblThanks = this.page.getByRole('heading', {
 			name: `Thanks ${user.firstName} for your order!`,
 		});
-		await this.verifyLocatorIsVisible(lblThanks);
+		await this.verifyLocatorIsVisible(lblThanks, 'Thanks Label');
 		// Verify Order is confirmed
-		await this.verifyLocatorIsVisible(this.lblOrderIsConfirmed);
+		await this.verifyLocatorIsVisible(this.lblOrderIsConfirmed, 'Order Is Confirmed Label');
 		// Verify status paid
-		await this.verifyLocatorIsVisible(this.lblPaid);
+		await this.verifyLocatorIsVisible(this.lblPaid, 'Paid Label');
 	}
 }

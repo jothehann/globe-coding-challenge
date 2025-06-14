@@ -26,16 +26,16 @@ export class DeliveryPage extends BasePage {
 	async verifyDeliveryDetails(user: UserType, address: AddressType) {
 		// Verify name
 		const name = `${user.firstName} ${user.lastName}`;
-		const userName = this.page.getByText(name, { exact: true });
-		await this.verifyLocatorIsVisible(userName);
+		const lblUserName = this.page.getByText(name, { exact: true });
+		await this.verifyLocatorIsVisible(lblUserName, 'Name Label');
 		// Verify email
-		const email = this.page.getByText(user.email, { exact: true });
-		await this.verifyLocatorIsVisible(email);
+		const lblEmail = this.page.getByText(user.email, { exact: true });
+		await this.verifyLocatorIsVisible(lblEmail, 'Email Label');
 		// Verify shipping address
-		const shippingAddress = this.page.getByText(new RegExp(address.streetAddress, 'i'));
-		await this.verifyLocatorIsVisible(shippingAddress);
+		const lblShippingAddress = this.page.getByText(new RegExp(address.streetAddress, 'i'));
+		await this.verifyLocatorIsVisible(lblShippingAddress, 'Shipping Address Label');
 		// Click save and continue
-		await this.clickByLocator(this.btnSaveAndContinue);
+		await this.clickByLocator(this.btnSaveAndContinue, 'Save and Continue Button');
 		await this.page.waitForURL('**/payment', { waitUntil: 'load' });
 		await this.verifyUrl('payment');
 	}

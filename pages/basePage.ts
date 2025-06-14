@@ -8,25 +8,26 @@ export class BasePage {
 	}
 
 	/**
-	 * Navigates to the home page of the application and sets the browser viewport size to 1920x1080.
+	 * Navigates to the home page of the application.
 	 *
-	 * @remarks
-	 * This method first sets the viewport size to ensure consistent rendering across tests,
-	 * then navigates to the root URL ('/').
+	 * This method sets the browser viewport size to 1280x720, navigates to the root URL ('/'),
+	 * waits for the page to fully load, and then verifies that the current URL matches
+	 * 'demo.spreecommerce.org'.
 	 *
-	 * @returns A promise that resolves when the navigation and viewport adjustment are complete.
+	 * @returns {Promise<void>} A promise that resolves when the navigation and verification are complete.
 	 */
 	async openHomePage() {
-		await this.page.setViewportSize({ width: 1920, height: 1080 });
+		await this.page.setViewportSize({ width: 1280, height: 720 });
 		await this.page.goto('/', { waitUntil: 'load' });
 		await this.verifyUrl('demo.spreecommerce.org');
 	}
 
 	/**
 	 * Verifies that the current page URL contains the specified substring.
+	 * Throws an error if the current URL does not include the provided value.
 	 *
 	 * @param url - The substring to check for in the current page URL.
-	 * @throws {Error} Throws an error if the current URL does not include the specified substring.
+	 * @throws {Error} If the current URL does not include the specified substring.
 	 */
 	async verifyUrl(url: string) {
 		const currentUrl = this.page.url();
@@ -36,54 +37,61 @@ export class BasePage {
 	}
 
 	/**
-	 * Waits for the specified locator to become visible and then performs a click action on it.
+	 * Clicks on the specified locator after verifying its visibility.
 	 *
-	 * @param locator - The Playwright Locator representing the element to be clicked.
-	 * @returns A promise that resolves when the click action has been performed.
+	 * @param locator - The Locator object representing the element to interact with.
+	 * @param selector - A string representing the selector used for logging or error messages.
+	 * @returns A promise that resolves when the click action is completed.
 	 */
-	async clickByLocator(locator: Locator) {
-		await this.verifyLocatorIsVisible(locator);
+	async clickByLocator(locator: Locator, selector: string) {
+		await this.verifyLocatorIsVisible(locator, selector);
 		await locator.click();
 	}
 
 	/**
 	 * Fills the specified text into an input element identified by the given locator.
-	 * Waits for the locator to become visible before filling the text.
-	 *
+	 * 
 	 * @param locator - The Playwright Locator representing the input element to fill.
-	 * @param text - The string value to be entered into the input element.
-	 * @returns A promise that resolves when the text has been filled.
+	 * @param text - The text string to input into the element.
+	 * @param selector - A string representation of the selector, used for verification and error reporting.
+	 * @returns A promise that resolves when the input has been filled.
+	 * @throws Will throw an error if the locator is not visible before filling.
 	 */
-	async fillByLocator(locator: Locator, text: string) {
-		await this.verifyLocatorIsVisible(locator);
+	async fillByLocator(locator: Locator, text: string, selector: string): Promise<void> {
+		await this.verifyLocatorIsVisible(locator, selector);
 		await locator.fill(text);
 	}
 
 	/**
-	 * Selects an option from a dropdown or select element using a given locator and the visible label text.
+	 * Selects an option from a dropdown element identified by the given locator, using the option's label.
 	 *
-	 * @param locator - The Playwright Locator pointing to the select element.
+	 * @param locator - The Playwright Locator for the dropdown element.
 	 * @param text - The visible label of the option to select.
+	 * @param selector - A string selector used for verification purposes.
 	 * @returns A promise that resolves when the option has been selected.
 	 */
-	async selectOptionByLocatorAndLabel(locator: Locator, text: string) {
+	async selectOptionByLocatorAndLabel(locator: Locator, text: string, selector: string) {
 		await locator.waitFor({ state: 'visible' });
-		await this.verifyLocatorIsVisible(locator);
+		await this.verifyLocatorIsVisible(locator, selector);
 		await locator.selectOption({ label: text });
 	}
 
 	/**
-	 * Verifies that the specified locator is visible on the page.
-	 * Throws an error with a custom message if the locator is not visible.
+	 * Verifies that the given locator is visible on the page.
 	 *
-	 * @param locator - The Playwright Locator to check for visibility.
-	 * @param errorMessage - The custom error message to include if the locator is not visible.
-	 * @throws {Error} Throws an error with details if the locator is not visible.
+	 * Waits for the locator to become visible, then checks its visibility.
+	 * Throws an error with details if the locator is not visible.
+	 *
+	 * @param locator - The Playwright Locator to verify.
+	 * @param selector - A string representing the selector, used for error reporting.
+	 * @throws {Error} If the locator is not visible on the page.
 	 */
-	async verifyLocatorIsVisible(locator: Locator): Promise<void> {
+	async verifyLocatorIsVisible(locator: Locator, selector: string): Promise<void> {
 		await locator.waitFor({ state: 'visible' });
-		if (!locator.isVisible()) {
-			throw new Error(`❌ Locator "${locator}" is not visible`);
+		try {
+			await locator.isVisible();
+		} catch (error) {
+			throw new Error(`❌ ${selector} is not visible on the page. Error details: ${error} `);
 		}
 	}
 }

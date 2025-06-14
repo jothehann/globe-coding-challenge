@@ -1,14 +1,17 @@
 [
 	{
-		"productName": "Ripped T-Shirt",
-		"size": "S"
+		"productName": "Dotted Shirt",
+		"size": "S",
+		"prize": 54.99
 	},
 	{
 		"productName": "Rolled Sleeve Shirt",
-		"size": "M"
+		"size": "M",
+		"prize": 50.99
 	},
 	{
 		"productName": "White Watch",
-		"count": 2
+		"count": 2,
+		"prize": 99.99
 	}
 ]

@@ -4,7 +4,6 @@ import { UserType } from '../types/userType';
 import { AddressType } from '../types/addressType';
 
 export class AddressPage extends BasePage {
-	private readonly lblEmail: Locator;
 	private readonly btnCountry: Locator;
 	private readonly txtBoxFirstName: Locator;
 	private readonly txtBoxLastName: Locator;
@@ -41,21 +40,21 @@ export class AddressPage extends BasePage {
 	async inputAddressDetails(user: UserType, address: AddressType) {
 		// Verify email
 		const lblEmail = this.page.getByText(user.email);
-		await this.verifyLocatorIsVisible(lblEmail);
+		await this.verifyLocatorIsVisible(lblEmail, 'Email label');
 		// Select country
-		await this.selectOptionByLocatorAndLabel(this.btnCountry, address.country);
+		await this.selectOptionByLocatorAndLabel(this.btnCountry, address.country, 'Country Dropdown');
 		// Input first name
-		await this.fillByLocator(this.txtBoxFirstName, user.firstName);
+		await this.fillByLocator(this.txtBoxFirstName, user.firstName, 'First Name Textbox');
 		// Input last name
-		await this.fillByLocator(this.txtBoxLastName, user.lastName);
+		await this.fillByLocator(this.txtBoxLastName, user.lastName, 'Last Name Textbox');
 		// Input street and house number
-		await this.fillByLocator(this.txtBoxAddress, address.streetAddress);
+		await this.fillByLocator(this.txtBoxAddress, address.streetAddress, 'Street Address Textbox');
 		// Input city
-		await this.fillByLocator(this.txtBoxCity, address.city);
+		await this.fillByLocator(this.txtBoxCity, address.city, 'City Textbox');
 		// Input postal
-		await this.fillByLocator(this.txtBoxPostalCode, address.postal);
+		await this.fillByLocator(this.txtBoxPostalCode, address.postal, 'Postal Textbox');
 		// Click save and continue
-		await this.clickByLocator(this.btnSaveAndContinue);
+		await this.clickByLocator(this.btnSaveAndContinue, 'Save and Continue Button');
 		await this.page.waitForURL('**/delivery', { waitUntil: 'load' });
 		await this.verifyUrl('delivery');
 	}

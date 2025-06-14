@@ -33,15 +33,15 @@ export class PaymentPage extends BasePage {
 		// Get iframe
 		const iframeLocator = this.page.locator('iframe[name^="__privateStripeFrame"]').nth(0);
 		// Verify iframe is visible
-		await this.verifyLocatorIsVisible(iframeLocator);
+		await this.verifyLocatorIsVisible(iframeLocator, 'IFrame');
 		// Fill card number
-		await this.fillByLocator(iframeLocator.contentFrame().locator(this.txtBoxCardNumber), payment.cardNumber);
+		await this.fillByLocator(iframeLocator.contentFrame().locator(this.txtBoxCardNumber), payment.cardNumber, 'Card Number Textbox');
 		// Fill expiration date
-		await this.fillByLocator(iframeLocator.contentFrame().locator(this.txtBoxExpirationDate), payment.expirationDate);
+		await this.fillByLocator(iframeLocator.contentFrame().locator(this.txtBoxExpirationDate), payment.expirationDate, 'Expiration Date Textbox');
 		// Fill security code
-		await this.fillByLocator(iframeLocator.contentFrame().locator(this.txtBoxSecurityCode), payment.securityCode);
+		await this.fillByLocator(iframeLocator.contentFrame().locator(this.txtBoxSecurityCode), payment.securityCode, 'Security Code Textbox');
 		// Click pay now
-		await this.clickByLocator(this.btnPayNow);
+		await this.clickByLocator(this.btnPayNow, 'Pay Now Button');
 		await this.page.waitForURL('**/complete', { waitUntil: 'load' });
 		await this.verifyUrl('complete');
 	}

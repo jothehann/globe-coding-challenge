@@ -1,12 +1,12 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { BasePage } from './basePage';
 
 export class HomePage extends BasePage {
-	private readonly txtSignUpSuccessfully: Locator;
+	private readonly lblSignUpSuccessfully: Locator;
 
 	constructor(page: Page) {
 		super(page);
-		this.txtSignUpSuccessfully = page.getByText('Welcome! You have signed up');
+		this.lblSignUpSuccessfully = page.getByText('Welcome! You have signed up');
 	}
 
 	/**
@@ -19,6 +19,6 @@ export class HomePage extends BasePage {
 	 * @returns {Promise<void>} A promise that resolves when the verification is complete.
 	 */
 	async verifySignUpSuccessfully(): Promise<void> {
-		await this.verifyLocatorIsVisible(this.txtSignUpSuccessfully);
+		await this.verifyLocatorIsVisible(this.lblSignUpSuccessfully, 'Sign Up Successfully Label');
 	}
 }

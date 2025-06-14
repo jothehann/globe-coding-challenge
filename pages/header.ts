@@ -26,7 +26,7 @@ export class Header extends BasePage {
 	 * @returns A promise that resolves when the click action is completed.
 	 */
 	async clickProfileIcon(): Promise<void> {
-		await this.clickByLocator(this.btnProfileIcon);
+		await this.clickByLocator(this.btnProfileIcon, 'Profile Icon');
 	}
 
 	/**
@@ -36,7 +36,7 @@ export class Header extends BasePage {
 	 * @returns {Promise<void>} A promise that resolves when the action is complete.
 	 */
 	async clickShowAll(): Promise<void> {
-		await this.clickByLocator(this.btnShowAll);
+		await this.clickByLocator(this.btnShowAll, 'Show All');
 		await this.page.waitForURL('**/products', { waitUntil: 'load' });
 		await this.verifyUrl('products');
 	}
@@ -50,7 +50,7 @@ export class Header extends BasePage {
 	 * @returns {Promise<void>} A promise that resolves when the click action is finished.
 	 */
 	async clickViewBag(): Promise<void> {
-		await this.clickByLocator(this.btnViewBag);
+		await this.clickByLocator(this.btnViewBag, 'View Bag');
 	}
 
 	/**
@@ -62,6 +62,6 @@ export class Header extends BasePage {
 	 * @returns {Promise<void>} A promise that resolves when the click action is completed.
 	 */
 	async clickCheckOut(): Promise<void> {
-		await this.clickByLocator(this.btnCheckOut);
+		await this.clickByLocator(this.btnCheckOut, 'Check Out');
 	}
 }
