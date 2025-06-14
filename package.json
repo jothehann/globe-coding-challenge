@@ -8,8 +8,8 @@
 		"test": "npx playwright test",
 		"report": "npx playwright show-report",
 		"trace": "npx playwright test --trace on",
-		"format": "prettier --write .",
-		"format:check": "prettier --check .",
+		"format": "prettier --check .",
+		"format:write": "prettier --write .",
 		"lint": "eslint . --ext .ts,.tsx,.js",
 		"lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
 	},
