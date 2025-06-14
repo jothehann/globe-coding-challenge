@@ -6,7 +6,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-       
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,6 +21,9 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
+      - name: Run ESLint
+        run: npm run lint
 
       - name: Run Playwright tests
         uses: nick-fields/retry@v3

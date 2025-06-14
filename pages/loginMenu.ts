@@ -13,7 +13,7 @@ export class LoginMenu extends BasePage {
 
 	constructor(page: Page) {
 		super(page);
-		this.menuLogin= page.locator('#slideover-account')
+		this.menuLogin = page.locator('#slideover-account');
 		this.lnkSignUp = page.getByRole('link', { name: 'Sign Up' });
 		this.lblSignUp = page.getByRole('heading', { name: 'Sign Up' });
 		this.txtBoxEmail = page.getByRole('textbox', {

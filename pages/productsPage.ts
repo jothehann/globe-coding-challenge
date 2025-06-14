@@ -18,11 +18,11 @@ export class ProductsPage extends BasePage {
 		this.header = new Header(page);
 		this.btnQuantity = page.locator('#product-details-page').getByRole('button').nth(1);
 		this.btnSelectSize = page.locator('#product-variant-picker').getByRole('button', { name: 'Please choose Size' });
-		this.menuSelectSize =page.locator('//div[@data-dropdown-target="menu"]');
+		this.menuSelectSize = page.locator('//div[@data-dropdown-target="menu"]');
 		this.btnProductVariantSize = page.locator('#product-variant-picker label');
 		this.btnAddToCart = page.getByRole('button', { name: 'Add To Cart' });
 		this.btnCloseSidebar = page.getByRole('button', { name: 'Close sidebar' });
-		this.lblTotal = page.locator('shopping-cart-total-amount')
+		this.lblTotal = page.locator('shopping-cart-total-amount');
 	}
 
 	/**
@@ -37,7 +37,7 @@ export class ProductsPage extends BasePage {
 	 * @param {number} index - The index of the product in the cart for which to get the total.
 	 * @returns {Promise<number>} The updated total for the specified product index.
 	 */
-	async addProduct({ productName, count = 1, size, prize }: ProductType, index: number ): Promise<number> {
+	async addProduct({ productName, count = 1, size, prize }: ProductType, index: number): Promise<number> {
 		// Click product
 		await this.page.getByRole('link', { name: new RegExp(productName, 'i') }).click();
 		const dashedProduct = productName.replace(/\s+/g, '-').toLowerCase();
@@ -100,7 +100,7 @@ export class ProductsPage extends BasePage {
 			await this.verifyUrl('products');
 		} else {
 			// Verify total
-			await this.verifyTotal(total)
+			await this.verifyTotal(total);
 			// Click check out
 			await this.header.clickCheckOut();
 			await this.page.waitForURL('**/address', { waitUntil: 'load' });
@@ -117,12 +117,12 @@ export class ProductsPage extends BasePage {
 	 */
 	private async getTotal(index: number, prize: number): Promise<number> {
 		let quantity: number;
-		if(index > 0) {
-			quantity = Number(await this.page.locator(`(//input[@name="line_item[quantity]"])[${index+1}]`).getAttribute('value'));
+		if (index > 0) {
+			quantity = Number(await this.page.locator(`(//input[@name="line_item[quantity]"])[${index + 1}]`).getAttribute('value'));
 		} else {
 			quantity = Number(await this.page.locator('//input[@name="line_item[quantity]"]').getAttribute('value'));
 		}
-		return quantity * prize
+		return quantity * prize;
 	}
 
 	/**

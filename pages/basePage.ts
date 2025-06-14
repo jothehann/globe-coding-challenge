@@ -50,7 +50,7 @@ export class BasePage {
 
 	/**
 	 * Fills the specified text into an input element identified by the given locator.
-	 * 
+	 *
 	 * @param locator - The Playwright Locator representing the input element to fill.
 	 * @param text - The text string to input into the element.
 	 * @param selector - A string representation of the selector, used for verification and error reporting.

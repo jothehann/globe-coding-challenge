@@ -1,31 +1,40 @@
 {
-  "name": "globe-coding-challenge",
-  "version": "1.0.0",
-  "description": "This is a coding challenge to write automated test script using Playwright to test Spree Commerce",
-  "main": "index.js",
-  "scripts": {
-    "ui-mode": "npx playwright test --ui",
-    "test": "npx playwright test",
-    "report": "npx playwright show-report",
-    "trace": "npx playwright test --trace on",
-    "prettier": "npx prettier tests/*.ts pages/*.ts data/*.json types/*.ts utils/*.ts .github/workflows/*.yml --write"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jothehann/globe-coding-challenge.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jothehann/globe-coding-challenge/issues"
-  },
-  "homepage": "https://github.com/jothehann/globe-coding-challenge#readme",
-  "devDependencies": {
-    "@faker-js/faker": "^9.8.0",
-    "@playwright/test": "^1.53.0",
-    "@types/node": "^24.0.0",
-    "dotenv": "^16.5.0",
-    "prettier": "^3.5.3"
-  }
+	"name": "globe-coding-challenge",
+	"version": "1.0.0",
+	"description": "This is a coding challenge to write automated test script using Playwright to test Spree Commerce",
+	"main": "index.js",
+	"scripts": {
+		"ui-mode": "npx playwright test --ui",
+		"test": "npx playwright test",
+		"report": "npx playwright show-report",
+		"trace": "npx playwright test --trace on",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"lint": "eslint . --ext .ts,.tsx,.js",
+		"lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jothehann/globe-coding-challenge.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jothehann/globe-coding-challenge/issues"
+	},
+	"homepage": "https://github.com/jothehann/globe-coding-challenge#readme",
+	"devDependencies": {
+		"@faker-js/faker": "^9.8.0",
+		"@playwright/test": "^1.53.0",
+		"@types/node": "^24.0.0",
+		"@typescript-eslint/eslint-plugin": "^8.34.0",
+		"@typescript-eslint/parser": "^8.34.0",
+		"dotenv": "^16.5.0",
+		"eslint": "^9.29.0",
+		"eslint-config-prettier": "^10.1.5",
+		"eslint-plugin-prettier": "^5.4.1",
+		"prettier": "^3.5.3",
+		"typescript": "^5.8.3"
+	}
 }
